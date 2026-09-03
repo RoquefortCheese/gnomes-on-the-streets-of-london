@@ -1,0 +1,64 @@
+extends CharacterBody3D
+
+# repurposed from lightsource
+# thank you past me
+
+const sensitivity = -0.005
+const speed = 8
+const gravity = 16
+const jumpspeed = 16
+const coyotetime = 0.25
+
+var panning: Vector2
+var timesinceground = 0
+var justjumped = false
+
+func _ready():
+	$Camera3D.rotation.y = randf() * TAU
+	panning.x = $Camera3D.rotation.y
+
+func _process(delta: float):
+	movementinput()
+	pancamera(delta)
+
+func movementinput():
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		var direction = Vector2.ZERO
+		if Input.is_action_pressed("forward"):
+			direction += Vector2.UP
+		if Input.is_action_pressed("back"):
+			direction += Vector2.DOWN
+		if Input.is_action_pressed("left"):
+			direction += Vector2.LEFT
+		if Input.is_action_pressed("right"):
+			direction += Vector2.RIGHT
+		direction = direction.normalized().rotated(-$Camera3D.rotation.y) * speed
+		velocity = Vector3(direction.x, velocity.y, direction.y)
+		if Input.is_action_just_pressed("jump"):
+			if timesinceground <= coyotetime and not justjumped:
+				velocity.y = jumpspeed
+				justjumped = true
+			else:
+				velocity.y = -64
+
+func pancamera(delta: float):
+	for axis in 2:
+		var correction = 1 - 2 ** (delta * -32)
+		var spin = (panning[axis] - $Camera3D.rotation[1 - axis]) * correction
+		$Camera3D.rotation[1 - axis] += spin
+		panning[axis] -= spin
+	$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -PI / 2, PI / 2)
+
+func _physics_process(delta: float):
+	velocity.y -= gravity * delta
+	move_and_slide()
+	timesinceground += delta
+	if is_on_floor():
+		timesinceground = 0
+		justjumped = false
+
+func _input(event: InputEvent):
+	if event.is_action_pressed("click"):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		panning += event.relative * sensitivity

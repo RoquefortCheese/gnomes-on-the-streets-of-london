@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://7oi0swjglwsv"]
+
+[ext_resource type="Script" uid="uid://b5cu0gmk30li" path="res://chunk.gd" id="1_kdh3y"]
+[ext_resource type="Texture2D" uid="uid://cfsr8414etkn5" path="res://cobblestone.jpg" id="2_eat54"]
+[ext_resource type="Texture2D" uid="uid://ddrd6d8ut7hug" path="res://window.png" id="3_a0kup"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_guk6m"]
+albedo_texture = ExtResource("2_eat54")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bae8c"]
+material = SubResource("StandardMaterial3D_guk6m")
+size = Vector2(8, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0kup"]
+albedo_texture = ExtResource("3_a0kup")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_eat54"]
+material = SubResource("StandardMaterial3D_a0kup")
+size = Vector3(5, 10, 5)
+
+[node name="Chunk" type="Node3D" unique_id=2066720279]
+script = ExtResource("1_kdh3y")
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1164654561]
+mesh = SubResource("PlaneMesh_bae8c")
+
+[node name="Building" type="MeshInstance3D" parent="." unique_id=1806179556]
+mesh = SubResource("BoxMesh_eat54")

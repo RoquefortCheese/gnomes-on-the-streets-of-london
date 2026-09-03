@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bpt1k6bc57mlu"]
+
+[ext_resource type="Script" uid="uid://bf5udvlq5cb1n" path="res://world.gd" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://bd8n8eihqvn05" path="res://player.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://7oi0swjglwsv" path="res://chunk.tscn" id="2_tlwt5"]
+
+[sub_resource type="Environment" id="Environment_bae8c"]
+background_mode = 1
+background_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+reflected_light_source = 1
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.5647059, 0.5647059, 0.627451, 1)
+fog_density = 1.0
+fog_depth_curve = 8.0
+fog_depth_begin = 0.0
+fog_depth_end = 96.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_guk6m"]
+albedo_color = Color(1, 0.7529412, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bae8c"]
+material = SubResource("StandardMaterial3D_guk6m")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_bae8c"]
+
+[node name="World" type="Node" unique_id=395585058]
+script = ExtResource("1_f3sb7")
+chunkscene = ExtResource("2_tlwt5")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1056753028]
+environment = SubResource("Environment_bae8c")
+
+[node name="SunOne" type="DirectionalLight3D" parent="." unique_id=1178756058]
+transform = Transform3D(0.8660254, -0.25, 0.4330127, 0, 0.8660254, 0.5, -0.5, -0.4330127, 0.75, 0, 0, 0)
+light_energy = 0.25
+sky_mode = 1
+
+[node name="SunTwo" type="DirectionalLight3D" parent="." unique_id=1426354366]
+transform = Transform3D(-0.7071068, 0.49999994, -0.49999994, 0, 0.70710677, 0.70710677, 0.7071067, 0.5, -0.5, 0, 0, 0)
+light_energy = 0.25
+sky_mode = 1
+
+[node name="Player" parent="." unique_id=1941265744 instance=ExtResource("2_fj7yv")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1137457007]
+mesh = SubResource("BoxMesh_bae8c")
+
+[node name="Chunks" type="Node3D" parent="." unique_id=1450325250]
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1064363940]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=271632331]
+shape = SubResource("WorldBoundaryShape3D_bae8c")
