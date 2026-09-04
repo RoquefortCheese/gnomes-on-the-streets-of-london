@@ -17,7 +17,7 @@ fog_light_color = Color(0.5647059, 0.5647059, 0.627451, 1)
 fog_density = 1.0
 fog_depth_curve = 8.0
 fog_depth_begin = 0.0
-fog_depth_end = 96.0
+fog_depth_end = 64.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_guk6m"]
 albedo_color = Color(1, 0.7529412, 0, 1)

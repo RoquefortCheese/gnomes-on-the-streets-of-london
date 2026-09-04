@@ -1,10 +1,10 @@
 extends Node
 class_name World
 
-const chunksize = 8
-const radius = 14
+const chunksize = 10
+const radius = 8
 var chunks: Dictionary[Vector2, Chunk]
-@export var chunkscene: PackedScene
+var chunkscene: PackedScene = load("res://chunk.tscn")
 
 func _process(delta: float):
 	genchunks()
@@ -16,6 +16,6 @@ func genchunks():
 			var tile = Vector2(x, y) + playerchunk
 			if tile not in chunks:
 				var chunk = chunkscene.instantiate()
-				chunk.create(tile)
 				$Chunks.add_child(chunk)
+				chunk.create(tile)
 				chunks[tile] = chunk

@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://hex27reenrua"]
+
+[ext_resource type="Texture2D" uid="uid://di6wljvhsuvts" path="res://gnome.png" id="1_cna81"]
+[ext_resource type="Script" uid="uid://bmrg6ce48bqhe" path="res://gnome.gd" id="1_qe4o5"]
+[ext_resource type="Texture2D" uid="uid://badgad6y36amg" path="res://goldgnome.png" id="3_dt2vp"]
+[ext_resource type="Texture2D" uid="uid://d3tewxpqx724u" path="res://raregnome.png" id="4_4jxkh"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cna81"]
+height = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cna81"]
+atlas = ExtResource("1_cna81")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qe4o5"]
+atlas = ExtResource("1_cna81")
+region = Rect2(0, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yl2l"]
+atlas = ExtResource("3_dt2vp")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiii2"]
+atlas = ExtResource("3_dt2vp")
+region = Rect2(0, 10, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5a4p"]
+atlas = ExtResource("4_4jxkh")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh54l"]
+atlas = ExtResource("4_4jxkh")
+region = Rect2(0, 10, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bae8c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cna81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qe4o5")
+}],
+"loop": 1,
+"name": &"idling-blue",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yl2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wiii2")
+}],
+"loop": 1,
+"name": &"idling-gold",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5a4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh54l")
+}],
+"loop": 1,
+"name": &"idling-mage",
+"speed": 3.0
+}]
+
+[node name="Gnome" type="CharacterBody3D" unique_id=1981186331]
+script = ExtResource("1_qe4o5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1007066966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_cna81")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=50202678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+pixel_size = 0.15
+billboard = 2
+alpha_cut = 1
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_bae8c")
+animation = &"idling-blue"

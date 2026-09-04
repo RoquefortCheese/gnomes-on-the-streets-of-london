@@ -4,8 +4,8 @@ extends CharacterBody3D
 # thank you past me
 
 const sensitivity = -0.005
-const speed = 8
-const gravity = 16
+const speed = 6
+const gravity = 20
 const jumpspeed = 16
 const coyotetime = 0.25
 
@@ -39,7 +39,7 @@ func movementinput():
 				velocity.y = jumpspeed
 				justjumped = true
 			else:
-				velocity.y = -64
+				velocity.y = -32
 
 func pancamera(delta: float):
 	for axis in 2:

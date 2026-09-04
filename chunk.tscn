@@ -9,7 +9,7 @@ albedo_texture = ExtResource("2_eat54")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bae8c"]
 material = SubResource("StandardMaterial3D_guk6m")
-size = Vector2(8, 8)
+size = Vector2(10, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0kup"]
 albedo_texture = ExtResource("3_a0kup")
@@ -27,3 +27,5 @@ mesh = SubResource("PlaneMesh_bae8c")
 
 [node name="Building" type="MeshInstance3D" parent="." unique_id=1806179556]
 mesh = SubResource("BoxMesh_eat54")
+
+[node name="Gnomes" type="Node3D" parent="." unique_id=1158427577]
